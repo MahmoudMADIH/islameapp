@@ -6,20 +6,20 @@ import 'package:islameapp/widget_fragment/quran/soura_name.dart';
 import 'package:islameapp/widget_fragment/quran/suraView.dart';
 
 class suraDetais extends StatefulWidget {
-  static String Route_Name='suraDetais';
-
+  static String Route_Name = 'suraDetais';
 
   @override
   State<suraDetais> createState() => _suraDetaisState();
 }
 
 class _suraDetaisState extends State<suraDetais> {
-  String suraContant ='';
-  List<String>suraLines=[];
+  String suraContant = '';
+  List<String> suraLines = [];
 
   @override
   Widget build(BuildContext context) {
-    SuraDetailsArgs args =ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs ;
+    SuraDetailsArgs args =
+        ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
     readSuraFile(args.fileName);
     return Container(
       decoration: BoxDecoration(
@@ -28,39 +28,50 @@ class _suraDetaisState extends State<suraDetais> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          centerTitle: true,
           backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
           title: Text(
-            args.suraName,style: TextStyle(
-            fontSize: 30 ,
-            fontWeight: FontWeight.bold
-          ),
+            "اسلامي",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
           ),
         ),
-        body: suraContant.isEmpty?
-        Center(child:CircularProgressIndicator()) :
-        Container(child: ListView.separated(
-          itemCount: suraLines.length,
-          itemBuilder: (context, index) {
-          return SuaraView(suraLines[index],index);
-        },
-          separatorBuilder: (context, index) {
-            return Divider(color: ThemData.primryColor,thickness: 2,);
-          },
-        )
-        ),
+
+        // appBar: AppBar(
+        //   centerTitle: true,
+        //   backgroundColor: Colors.transparent,
+        //   title: Text(
+        //     args.suraName,style: TextStyle(
+        //     fontSize: 30 ,
+        //     fontWeight: FontWeight.bold
+        //   ),
+        //   ),
+        // ),
+        body: suraContant.isEmpty
+            ? Center(child: CircularProgressIndicator())
+            : Container(
+                 margin: EdgeInsets.all(8),
+                padding: EdgeInsets.all(8),
+                child: ListView.builder(
+                itemCount: suraLines.length,
+                itemBuilder: (context, index) {
+                  return SuaraView(suraLines[index], index);
+                },
+
+              )),
       ),
     );
   }
 
-  void readSuraFile(String fileName) async{
-    String fileComtant = await rootBundle.loadString('assets/files/${fileName}');
-    suraContant=fileComtant;
-    suraContant=suraContant.trim();
-    suraLines=suraContant.split('\n');
-    setState(() {
-
-    });
+  void readSuraFile(String fileName) async {
+    String fileComtant =
+        await rootBundle.loadString('assets/files/${fileName}');
+    suraContant = fileComtant;
+    suraContant = suraContant.trim();
+    suraLines = suraContant.split('\n');
+    setState(() {});
   }
 }
-
