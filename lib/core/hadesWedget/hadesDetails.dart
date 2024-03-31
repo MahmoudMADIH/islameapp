@@ -88,7 +88,7 @@ class _hadethDetailsState extends State<hadethDetails> {
     if(currentIndex==2){
       return radioFragment();
     }if(currentIndex==3){
-      return sebhaFragment();
+      return SebhaFragment();
     }
   }
 }

@@ -1,23 +1,24 @@
-import 'dart:ui';
+import 'dart:math' as math; // Import the math library for rotations
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../theming/my_them_data.dart';
 
-class sebhaFragment extends StatefulWidget {
-  const sebhaFragment({super.key});
+class SebhaFragment extends StatefulWidget {
+  const SebhaFragment({super.key});
 
   @override
-  State<sebhaFragment> createState() => _sebhaFragmentState();
+  State<SebhaFragment> createState() => _SebhaFragmentState();
 }
 
-class _sebhaFragmentState extends State<sebhaFragment> {
-  int num_tasbhe = 0;
+class _SebhaFragmentState extends State<SebhaFragment> {
+  int index=0;
+  int numTasbeh = 0; // Use camelCase for variable names
 
-  int index = 0;
+  double _imageAngle = 0.0; // Track image rotation angle
 
-  List<String> type_of_tasabeh = ['الله اكبر', 'سبحان الله', 'الحمد لله'];
+  List<String> typeOfTasabeh = ['الله اكبر', 'سبحان الله', 'الحمد لله'];
 
   @override
   Widget build(BuildContext context) {
@@ -26,52 +27,67 @@ class _sebhaFragmentState extends State<sebhaFragment> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
-            flex: 3, child: Image.asset("assets/images/body_sebha_logo.png")),
+          flex: 8,
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                _imageAngle += math.pi/33; // Rotate image by 180 degrees
+                numTasbeh++;
+                TypeOfTasabeh();
+              });
+            },
+            child: Transform(
+              alignment: Alignment.center, // Rotate around image centerrotateZ(_imageAngle)
+              transform: Matrix4.identity()..rotateZ(_imageAngle), // Apply rotation
+              child: Image.asset("assets/images/sebha.png"),
+            ),
+          ),
+        ),
         Expanded(
-            flex: 7,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              //crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'عدد التسبيحات',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  '${num_tasbhe}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      num_tasbhe++;
-                      TypeOfTsabeh();
-                      setState(() {});
-                    },
-                    style: ElevatedButton.styleFrom(
-                        maximumSize: Size(150, 50),
-                        backgroundColor: ThemData.primryColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    child: Text(
-                      "${type_of_tasabeh[index]}",
-                      style: TextStyle(fontSize: 20),
-                    )),
-              ],
-            ))
+          flex: 7,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'عدد التسبيحات',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '$numTasbeh',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    numTasbeh++;
+                    TypeOfTasabeh();
+                    setState(() {});
+                  },
+                  style: ElevatedButton.styleFrom(
+                      maximumSize: Size(150, 50),
+                      backgroundColor: ThemData.primryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: Text(
+                    "${typeOfTasabeh[index]}",
+                    style: TextStyle(fontSize: 20),
+                  )),
+            ],
+          ),
+        )
       ],
     );
   }
 
-  void TypeOfTsabeh() {
-    for (int i = 0; i < type_of_tasabeh.length; i++) {
-      if (num_tasbhe == 33) {
+  void TypeOfTasabeh() {
+    for (int i = 0; i < typeOfTasabeh.length; i++) {
+      if (numTasbeh == 33) {
         if (index <= 3) {
           index++;
-          num_tasbhe = 0;
+          numTasbeh = 0;
           setState(() {});
-          num_tasbhe = 0;
+          numTasbeh = 0;
         }
         if (index == 3) {
           index = index - 3;
