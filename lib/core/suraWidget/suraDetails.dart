@@ -87,7 +87,7 @@ class _suraDetaisState extends State<suraDetails> {
     if(currentIndex==2){
       return radioFragment();
     }if(currentIndex==3){
-      return sebhaFragment();
+      return SebhaFragment();
     }
   }
 }
