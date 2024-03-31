@@ -21,10 +21,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
+
           image: DecorationImage(
-              image: AssetImage("assets/images/default_bg.png"))),
+              image: AssetImage("assets/images/default_bg.png"),)),
       child: Scaffold(
+
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: Colors.transparent,

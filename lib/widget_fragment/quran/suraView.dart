@@ -21,7 +21,7 @@ class SuaraView extends StatelessWidget {
                       softWrap: true,
                      maxLines: 6,
                       textHeightBehavior: TextHeightBehavior(applyHeightToLastDescent: true),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.end,
                             style: TextStyle(
                          fontWeight: FontWeight.w400,
                       fontSize: 18
