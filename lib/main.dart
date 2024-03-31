@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islameapp/core/hadesWedget/hadesDetails.dart';
 import 'package:islameapp/core/home.dart';
 import 'package:islameapp/widget_fragment/quran/sura_details.dart';
 
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       ,
       routes: {
         Home.ROUTE_NAME:(context)=>Home(),
-        suraDetais.Route_Name:(context)=>suraDetails()
+        suraDetais.Route_Name:(context)=>suraDetails(),
+        hadethDetails.Route_Name:(context)=>hadethDetails()
 
       },
       initialRoute: Home.ROUTE_NAME,
