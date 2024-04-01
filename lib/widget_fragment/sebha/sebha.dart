@@ -17,6 +17,8 @@ class _SebhaFragmentState extends State<SebhaFragment> {
   int numTasbeh = 0; // Use camelCase for variable names
 
   double _imageAngle = 0.0; // Track image rotation angle
+  double _vibrationAngle = 0.0; // Track image vibration angle
+
 
   List<String> typeOfTasabeh = ['الله اكبر', 'سبحان الله', 'الحمد لله'];
 
@@ -34,11 +36,13 @@ class _SebhaFragmentState extends State<SebhaFragment> {
                 _imageAngle += math.pi/33; // Rotate image by 180 degrees
                 numTasbeh++;
                 TypeOfTasabeh();
+                _vibrationAngle = math.Random().nextDouble() * 0.1 - 0.05;
               });
             },
             child: Transform(
               alignment: Alignment.center, // Rotate around image centerrotateZ(_imageAngle)
-              transform: Matrix4.identity()..rotateZ(_imageAngle), // Apply rotation
+              transform: Matrix4.identity()..rotateZ(_imageAngle)
+              ..translate(0.0,_vibrationAngle*10), // Apply rotation
               child: Image.asset("assets/images/sebha.png"),
             ),
           ),
